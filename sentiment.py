@@ -157,7 +157,15 @@ for url in links:
 
 # Sentiment Analysis, Farrukh Mirzaev.
 
-# Step 1: Extract the messages from the database
+# Step 1: Cleaning the table with empty or missing values.
+
+conn = sqlite3.connect('database.db')
+cursor = conn.cursor()
+cursor.execute("DELETE FROM reviews WHERE Message = '' OR Message IS NULL")
+conn.commit()
+conn.close()
+
+# Step 2: Extract the messages from the database
 
 # Connecting to the database
 conn = sqlite3.connect('database.db')
@@ -175,7 +183,7 @@ for i in mycursor:
 conn.close()
 
 
-# Step 2: Get the sentiment values from Azure Text Analytics API
+# Step 3: Get the sentiment values from Azure Text Analytics API
 # - install azure text analytics: pip install azure-ai-textanalytics
 
 # Azure Text Analytics resource key and endpoint
@@ -218,7 +226,7 @@ for i in responses:
     sentiments_tuple.append((sentiment, message))
 
 
-# Step 3: Insert the sentiment values into the database
+# Step 4: Insert the sentiment values into the database
 
 # Connecting to the database
 conn = sqlite3.connect('database.db')
@@ -234,3 +242,4 @@ conn.commit()
 
 # Closing the connection
 conn.close()
+
