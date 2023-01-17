@@ -179,8 +179,7 @@ conn.close()
 # - install azure text analytics: pip install azure-ai-textanalytics
 
 # Azure Text Analytics resource key and endpoint
-api_key = "155ef1b9d9144237b9a2479897342f94"
-endpoint = "https://text-analytics-test1.cognitiveservices.azure.com/"
+
 
 # Setting up the client
 client = TextAnalyticsClient(endpoint=endpoint, credential=AzureKeyCredential(api_key))
